@@ -18,7 +18,7 @@ podTemplate(label: label, containers: [
 
 		// #1 Github 소스 가져오기
                 stage('Get Source') {
-                  git credentialsId: 'cloudnative-academy', url: 'https://github.com/YunyoungShin/cicd-front', branch: 'master'
+                  git credentialsId: 'github-lab20', url: 'https://github.com/YunyoungShin/cicd-front.git', branch: 'master'
                 }
 		// #2 Properties 파일 읽기		
                 def props = readProperties file:"./kubernetes/pipeline.properties"
@@ -72,6 +72,7 @@ podTemplate(label: label, containers: [
                     sh "kubectl apply -n ${namespace} -f ${deployment}"
                     sh "kubectl apply -n ${namespace} -f ${service}"
                     sh "kubectl get svc -n devops"
+                    sh "kubectl get svc -n lab20"
                     }
                   }
 		// Slack - 빌드 성공시
